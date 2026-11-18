@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projets Ligue Amlasud 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Plan : une colonne lisible, cartes de challenges en grille, tableau de bord dessous. Bleu et rouge de la charte de la ligue. */
+:root{
+  --bg:#f2f4f8; --surface:#ffffff; --ink:#172338; --muted:#56627a; --line:#d5dbe6;
+  --accent:#12588f; --accent-ink:#ffffff; --date:#c81838;
+  --ok:#17693f; --ok-bg:#dbefe2; --wait:#8a5a00; --wait-bg:#fbe9bf; --off:#5d6964; --off-bg:#e6eae6; --info:#1d5a8a; --info-bg:#dcebf7; --crit:#a3122c; --crit-bg:#fbdde3;
+  --display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif; --body:Arial,Helvetica,"Liberation Sans",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark; --bg:#0e1420; --surface:#172032; --ink:#e7ecf5; --muted:#9eabc2; --line:#2a364d;
+  --accent:#7fb6e6; --accent-ink:#08213a; --date:#ff7d8f;
+  --ok:#7fe0b8; --ok-bg:#14402f; --wait:#ffd27a; --wait-bg:#4a3608; --off:#a9b6af; --off-bg:#26322d; --info:#9ccbf2; --info-bg:#173449; --crit:#ffb3bf; --crit-bg:#5a1522;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark; --bg:#0e1420; --surface:#172032; --ink:#e7ecf5; --muted:#9eabc2; --line:#2a364d;
+  --accent:#7fb6e6; --accent-ink:#08213a; --date:#ff7d8f;
+  --ok:#7fe0b8; --ok-bg:#14402f; --wait:#ffd27a; --wait-bg:#4a3608; --off:#a9b6af; --off-bg:#26322d; --info:#9ccbf2; --info-bg:#173449; --crit:#ffb3bf; --crit-bg:#5a1522;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--date);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+header.top{padding:28px 0 14px}
+.menubar{position:sticky;top:0;z-index:6;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.menubar nav.jump{margin:0;padding:10px 0}
+.intro{margin-top:8px}
+main > section{scroll-margin-top:120px}
+#form-zone iframe{width:100%;height:2200px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-top:14px}
+.form-alt{margin-top:14px;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.logos{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.logo{display:block;background:#fff;border-radius:10px;padding:8px 12px;height:115px;width:auto;max-width:100%;object-fit:contain}
+.bandeau{display:block;max-width:min(100%,520px);height:auto;background:#fff;border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(1.9rem,4.5vw,2.9rem);font-weight:800;margin-top:6px}
+.lead{max-width:62ch;color:var(--muted);margin:10px 0 0}
+nav.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+nav.jump a{padding:7px 12px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-weight:600;font-size:.9rem;background:var(--surface);color:var(--ink)}
+.sante{margin:20px 0 0;padding:12px 16px;border-left:5px solid var(--date);background:var(--surface);border-radius:0 8px 8px 0;font-size:.95rem}
+section{padding:34px 0 6px}
+html.vues main > section{display:none}
+html.vues main > section.active{display:block}
+nav.jump a[aria-current="page"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+h2{font-size:1.55rem;font-weight:800}
+.sub{color:var(--muted);margin:6px 0 18px;max-width:65ch}
+.h3{font-size:1.15rem;font-weight:800;margin:22px 0 12px}
+.rouge{color:var(--date)}
+nav.jump a.rouge{color:var(--date);border-color:var(--date)}
+.plus{margin:12px 0 0;max-width:70ch;font-size:.95rem}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:0;margin:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.steps li::before{content:counter(s);font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--accent);display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.card .num{font-family:var(--display);font-weight:800;color:var(--accent);font-size:.95rem}
+.card h3{font-size:1.25rem;font-weight:800}
+.card p{margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.pill{display:inline-block;padding:3px 9px;border-radius:999px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.p-ok{background:var(--ok-bg);color:var(--ok)} .p-wait{background:var(--wait-bg);color:var(--wait)}
+.p-off{background:var(--off-bg);color:var(--off)} .p-info{background:var(--info-bg);color:var(--info)} .p-crit{background:var(--crit-bg);color:var(--crit)}
+.card ul,.card ol{margin:0;padding-left:18px;font-size:.93rem}
+.card .when{font-size:.9rem;color:var(--date);font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.btn{display:inline-block;padding:9px 14px;border-radius:8px;font-weight:700;font-size:.92rem;text-decoration:none;border:1.5px solid var(--accent);color:var(--accent);background:transparent;cursor:pointer;font-family:inherit}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.todo{font-size:.82rem;color:var(--muted);min-height:1.2em}
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:.9rem}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+.max{text-transform:none;letter-spacing:0;font-weight:400}
+thead th{vertical-align:bottom;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+tbody tr:last-child td{border-bottom:0}
+td.tot{font-family:var(--display);font-weight:800;font-size:1.05rem;font-variant-numeric:tabular-nums;text-align:right}
+th.tot{text-align:right}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.note{font-size:.85rem;color:var(--muted);margin:10px 0 0}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+footer{margin-top:40px;padding:22px 0 80px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="logos"><img class="logo" src="logo-cono-sur.jpg" alt="Ligue AEFE UNSS Amérique latine sud" width="88" height="115"><img class="logo" src="logo-ligue.png" alt="Ligue Amérique latine sud" width="200" height="115"></div>
+  <div class="eyebrow">Ligue sportive scolaire AEFE-UNSS · Amérique latine rythme sud</div>
+  <h1>Projets 2027</h1>
+  <p class="lead">Choisissez un projet et inscrivez-vous en une minute.<span data-pts> Chaque étape validée rapporte des points à votre établissement.</span></p>
+</div></header>
+<div class="menubar"><div class="wrap">
+  <nav class="jump" id="menu" aria-label="Menu">
+    <a class="rouge" href="#css">Postuler à la commission</a><a href="#projets">Les projets</a><a class="form" href="#formulaire">Formulaire</a><a href="#label">Label Génération 2030</a><a href="#tableau">Tableau de bord</a><a href="#contacts">Contacts</a><a href="https://view.genially.com/68a5c2e8805f0fe4595d3413">Calendrier sportif</a>
+  </nav>
+</div></div>
+
+<main class="wrap">
+<div class="intro">
+  <p class="sante"><strong>2026-2027, Année de la santé.</strong> « Promouvoir, prévenir, accompagner : agir ensemble pour notre santé ! » Tous les projets de la ligue s'inscrivent dans ce thème.</p>
+  <p class="plus">Les dates de l'année sont dans le <a href="https://view.genially.com/68a5c2e8805f0fe4595d3413">calendrier sportif</a>. Pour plus d'informations, connectez-vous à l'<a href="https://orion.aefe.fr/Intranet/air2_240366/eps-et-sport-scolaire-en-amlasud">espace collaboratif Orion « EPS et sport scolaire en Amlasud »</a>.</p>
+</div>
+<section id="css" aria-labelledby="t-css">
+  <h2 id="t-css" class="rouge">Postuler à la commission sport scolaire</h2>
+  <p class="sub">La ligue renouvelle sa commission sport scolaire (CSS) pour 2027 et 2028. Elle réunit des enseignants volontaires du 1er et du 2nd degré qui font vivre le sport scolaire dans la zone.</p>
+  <div class="two">
+    <div class="card">
+      <h3>Le cadre des missions</h3>
+      <ul>
+        <li>Construire des évènements sportifs scolaires, dont le regroupement autour des jeunes officiels et la Semaine Olympique et Paralympique.</li>
+        <li>Analyser les dossiers des évènements avant le comité de pilotage.</li>
+        <li>Produire des ressources pour dynamiser la zone, par exemple pour les jeunes arbitres.</li>
+      </ul>
+      <p><strong>L'engagement</strong> : la commission est constituée à partir de 2027 et jusqu'en 2028. Elle sollicite ses membres à deux occasions distinctes.</p>
+      <ol>
+        <li><strong>Un travail au fil de l'année</strong> : une dizaine d'heures par an, en dehors de l'emploi du temps scolaire.</li>
+        <li><strong>Un temps institutionnalisé de 2 jours par an</strong>, qui peut avoir lieu sur le temps scolaire : en présentiel une année sur deux, à distance l'autre année.</li>
+      </ol>
+      <p class="note">Le référent sport scolaire (RSS), Gahi Traoré, reste en place jusqu'en 2028 inclus. Sa fonction sera renouvelée avec la prochaine commission.</p>
+    </div>
+    <div class="card">
+      <h3>Candidater</h3>
+      <div class="when">Candidatures jusqu'au <span id="d-css"></span></div>
+      <p><strong>Qui peut postuler</strong> : les professeurs d'EPS et les professeurs principaux du 1er degré qui enseignent aussi l'EPS.</p>
+      <p><strong>En trois étapes</strong></p>
+      <ol>
+        <li>Téléchargez la fiche et faites-la signer par votre chef d'établissement.</li>
+        <li>Remplissez le formulaire : nom, prénom, établissement et fonction. C'est le même formulaire que pour les challenges, sans compte à créer.</li>
+        <li>Envoyez la fiche signée par mail à <a href="mailto:ligue-sportive-amlasud@mermoz.edu.ar">ligue-sportive-amlasud@mermoz.edu.ar</a>.</li>
+      </ol>
+      <div class="actions">
+        <a class="btn" href="fiche-candidature-css.pdf">Télécharger la fiche à faire signer</a>
+        <a class="btn primary" id="btn-css" href="#css">Postuler</a>
+      </div>
+      <div class="todo" id="todo-css" role="status"></div>
+    </div>
+  </div>
+</section>
+
+<section id="projets" aria-labelledby="t-proj">
+  <h2 id="t-proj">Les projets</h2>
+  <p class="sub"><span data-pts>Barème repris de 2026, à confirmer pour 2027.</span><span data-nopts>Sept projets au choix, à mener dans l'année avec vos élèves.</span></p>
+  <h3 class="h3">Comment ça marche</h3>
+  <ol class="steps">
+    <li><strong>Je m'inscris</strong> au projet de mon choix avant le <span id="d-limite"></span>. Un référent peut inscrire l'établissement, un enseignant peut s'inscrire seul. Le challenge 0 concerne tous les établissements : pas d'inscription.</li>
+    <li><strong>Je mène le projet</strong> avec mes élèves, à la période indiquée sur la carte.</li>
+    <li><strong>Je dépose le lien</strong> de mon article ou de ma vidéo : la ligue valide<span data-pts>, les points s'ajoutent au tableau de bord</span><span data-nopts> et le tableau de bord se met à jour</span>.</li>
+  </ol>
+  <h3 class="h3" id="challenges">Choisir un projet</h3>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section id="label" aria-labelledby="t-label">
+  <h2 id="t-label">Label Génération 2030</h2>
+  <p class="sub">Le label Génération 2024 devient Génération 2030. Il reconnaît les établissements qui développent la pratique sportive des élèves.</p>
+  <div class="two">
+    <div class="card">
+      <h3>Trois niveaux</h3>
+      <ul><li>Niveau 1 : engagement</li><li>Niveau 2 : approfondissement</li><li>Niveau 3 : excellence</li></ul>
+      <p>Un établissement déjà labellisé Génération 2024 est automatiquement au niveau 1.</p>
+    </div>
+    <div class="card">
+      <h3>Candidater</h3>
+      <p>Pas de date limite dans la zone : les dossiers se déposent au fil de l'eau. Un premier dépôt avant la mi-décembre permet de prendre de l'avance.</p>
+      <p>Organiser la Semaine Olympique et Paralympique est obligatoire pour obtenir le label (voir le challenge 2).</p>
+      <div class="actions">
+        <a class="btn primary" href="https://demarche.numerique.gouv.fr/commencer/labellisation-generation-2030">Déposer une candidature</a>
+        <a class="btn" href="https://www.education.gouv.fr/bo/2025/Hebdo48/MENE2533153N">Lire la circulaire de cadrage</a>
+        <a class="btn" href="https://eduscol.education.fr/document/67341/download">Lire le cahier des charges</a>
+      </div>
+      <p class="note">Contact mission sport AEFE : generation2030.aefe@diplomatie.gouv.fr</p>
+    </div>
+  </div>
+</section>
+
+<section id="tableau" aria-labelledby="t-tab">
+  <h2 id="t-tab">Tableau de bord</h2>
+  <p class="sub">Où en est chaque établissement, projet par projet. Le tableau se met à jour après chaque validation.</p>
+  <div class="legend" id="legend"></div>
+  <div class="tablebox"><table>
+    <thead><tr id="thead"></tr></thead><tbody id="tbody"></tbody>
+  </table></div>
+  <p class="note"><span data-pts>Maquette : les statuts et points affichés sont ceux de l'édition 2026, à titre d'exemple.</span><span data-nopts>Le tableau est vide pour l'instant : il se remplira au fil des inscriptions 2027.</span></p>
+</section>
+
+<section id="fiche" aria-labelledby="t-fiche">
+  <h2 id="t-fiche">Ma fiche statistique</h2>
+  <div class="two" style="margin-top:14px">
+    <div class="card">
+      <h3>Une fiche par établissement</h3>
+      <p>Équipe EPS, créneaux d'AS, effectifs et jeunes officiels. Les noms et les volumes horaires de l'an dernier sont déjà saisis : il suffit de les ajuster.</p>
+      <ul><li>Enseignants, volumes horaires et activités : avant le 20 mars 2027.</li><li>Effectifs et jeunes officiels : avant le 30 octobre 2027.</li></ul>
+      <p>C'est elle qui valide le challenge 0.</p>
+    </div>
+    <div class="card">
+      <h3>Un accès nominatif</h3>
+      <p>Chaque établissement ne voit que ses propres données. Le lien est envoyé par mail au référent désigné par la ligue ; il n'est pas publié sur ce site.</p>
+      <p>Vous êtes référent et n'avez pas reçu votre lien ? Écrivez à <a href="mailto:ligue-sportive-amlasud@mermoz.edu.ar">ligue-sportive-amlasud@mermoz.edu.ar</a>.</p>
+    </div>
+  </div>
+</section>
+<section id="formulaire" aria-labelledby="t-form">
+  <h2 id="t-form">Formulaire de la ligue</h2>
+  <p class="sub">Un seul formulaire, sans compte Google : inscription aux projets, candidature à la commission sport scolaire ou dépôt d'un lien. Le menu reste en haut de la page pour revenir aux projets.</p>
+  <div id="form-zone"></div>
+</section>
+<section id="contacts" aria-labelledby="t-contacts">
+  <h2 id="t-contacts">Contacts</h2>
+  <div class="two" style="margin-top:14px">
+    <div class="card">
+      <h3>Coordonnateur de la ligue</h3>
+      <p><strong>Guillaume Margheritora</strong>, enseignant formateur EPS du 2nd degré pour la zone Amérique latine rythme sud.</p>
+      <p>Écrire à la ligue : <a href="mailto:ligue-sportive-amlasud@mermoz.edu.ar">ligue-sportive-amlasud@mermoz.edu.ar</a></p>
+    </div>
+    <div class="card">
+      <h3>Référent sport scolaire</h3>
+      <p><strong>Gahi Traoré</strong> suit les établissements et les projets de la ligue.</p>
+      <p>Plus d'informations sur l'<a href="https://orion.aefe.fr/Intranet/air2_240366/eps-et-sport-scolaire-en-amlasud">espace collaboratif Orion</a>.</p>
+    </div>
+    <div class="card">
+      <h3>Référente primaire</h3>
+      <p><strong>Stéphanie Hanzo</strong>, EMFE 1er degré, référente primaire pour la ligue.</p>
+      <p>Écrire : <a href="mailto:stephanie.hanzo@aefe.fr">stephanie.hanzo@aefe.fr</a></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><img class="bandeau" src="bandeau-partenaires.png" alt="Ligue Amérique latine sud, UNSS, AEFE" width="1435" height="279">Ligue sportive scolaire AEFE-UNSS Amlasud · <span id="contact"></span></div></footer>
+
+<script>
+/* ====== À MODIFIER PAR LA LIGUE : tout le contenu du site est ici ====== */
+const CONFIG = {
+  afficherPoints: false,             // true = affiche les points, les maximums et le classement
+  dateLimite: "2026-12-15",          // date limite d'inscription
+  contact: "ligue-sportive-amlasud@mermoz.edu.ar",
+  formulaire: "https://docs.google.com/forms/d/e/1FAIpQLSfaUK-dbn2TqKBK8m08CscoHGsSrRps6_sh61tkD8mFQQjGrQ/viewform",                    // formulaire unique : projets, commission sport scolaire, dépôt de lien
+  dateLimiteCSS: "2026-12-15"        // date limite de candidature à la commission
+};
+const CHALLENGES = [
+ {id:"c0", num:"Challenge 0", titre:"Développe ton AS", pour:"Tous les établissements", ouvert:null, max:15,
+  texte:"Tenir à jour la fiche statistique de l'association sportive.",
+  valider:["Fiche statistique à jour","Assemblée générale réalisée","Projet d'AS avec axes et indicateurs"],
+  quand:"Équipe et créneaux avant le 20 mars 2027, effectifs avant le 30 octobre 2027", lien:null},
+ {id:"c1", num:"Challenge 1", titre:"Forme tes Jeunes Officiels", pour:"Collège et lycée", ouvert:true, max:13,
+  texte:"Former et certifier des élèves arbitres, juges, organisateurs ou reporters.",
+  valider:["Jeunes officiels certifiés dans OPUSS","Article sur le site de l'établissement"],
+  depot:"Déposer le lien de mon article", quand:"Échéance : fin octobre 2027", lien:{t:"Ouvrir OPUSS", u:"https://opuss.unss.org"}},
+ {id:"c2", num:"Challenge 2", titre:"Fais ta Semaine Olympique et Paralympique", pour:"Du CP à la terminale", ouvert:true, max:12,
+  texte:"Organiser la SOP dans l'établissement. Les actions peuvent avoir lieu avant ou après la semaine selon vos congés.",
+  valider:["Projet déposé sur le site officiel Génération 2030","Article sur le site de l'établissement"],
+  depot:"Déposer le lien de mon article",
+  quand:"SOP du 29 mars au 3 avril 2027", lien:{t:"Déposer mon projet sur le site officiel", u:"https://generation2030.franceolympique.com"}},
+ {id:"c3", num:"Challenge 3", titre:"Danse, joue, filme", pour:"Tous niveaux", ouvert:true, max:3,
+  texte:"Créer et filmer une production artistique avec ses élèves. Le règlement de la nouvelle version est dans la présentation.",
+  valider:["Article avec vidéo sur le site de l'établissement"],
+  depot:"Déposer le lien de ma vidéo",
+  quand:"Échéances 2027 à confirmer", lien:{t:"Voir la présentation 2027", u:"https://aefe.genially.com/6acfa7c6a3639f23be4e48d3"}},
+ {id:"c4", num:"Challenge 4", titre:"Courir ensemble avec l'AEFE Tour", pour:"Élèves, personnels et parents", ouvert:true, max:4,
+  texte:"Cumuler les kilomètres parcourus à pied, en courant ou à vélo pour relier les établissements de la zone, puis du réseau. Ce n'est pas une compétition.",
+  valider:["Distances saisies sur AEFE Tour (validation par la ligue)","Article facultatif"],
+  quand:"Validation fin novembre 2027", lien:{t:"Ouvrir AEFE Tour Amlasud", u:"https://aefetour.com/amlasud/"}},
+ {id:"dj", num:"Défis", titre:"Défis des Jeux d'Amlasud", pour:"Du cycle 3 au lycée", ouvert:true, max:5,
+  texte:"Faire vivre les Jeux aux élèves qui ne se déplacent pas, depuis leur établissement. La présentation est celle de l'édition 2026, pour donner une idée ; elle sera mise à jour en cours d'année.",
+  valider:["Participation communiquée à la ligue"],
+  quand:"Déroulement en septembre 2027", lien:{t:"Voir les défis de l'édition 2026", u:"https://aefe.genially.com/6a427a1358e083307a9b5ea8"}},
+ {id:"ec", num:"Échecs", titre:"Échecs en Amlasud", pour:"Tous niveaux", ouvert:true, max:null,
+  texte:"Jouer aux échecs en ligne sur Lichess, entre établissements de la zone et avec les autres ligues.",
+  etapes:"Pour participer", inscrire:"Inscrire un référent échecs",
+  valider:["Pas encore de référent échecs dans l'établissement : inscrivez son nom avec le formulaire.","Référent déjà désigné : il crée l'équipe de l'établissement sur Lichess, crée un groupe et y inscrit ses élèves.","Les élèves font alors partie de l'équipe Amlasud et de l'équipe de l'établissement."],
+  quand:"Tournois tout au long de l'année", lien:{t:"Ouvrir Lichess", u:"https://lichess.org"}}
+];
+/* Statuts : v = validé, p = a participé, j = JO certifiés, r = sans référent, b = bilan reçu, i = inscrit, n = ne participe pas, "" = non inscrit */
+const ETABS = [
+ ["Buenos Aires",{c0:"v",c1:"j",c2:"i",c3:"n",c4:"i",dj:"p"},31],
+ ["La Paz",      {c0:"v",c1:"j",c2:"i",c4:"i",dj:"p",ec:"p"},30],
+ ["São Paulo",   {c0:"v",c1:"j",c2:"v",c3:"v",c4:"i",ec:"p"},29],
+ ["Santiago",    {c0:"v",c1:"j",c3:"v",dj:"p"},26],
+ ["Montevideo",  {c0:"r",c1:"j",c2:"v",c3:"n",c4:"n",dj:"p"},25],
+ ["Concepción",  {c0:"v",c1:"j",c4:"n",dj:"p"},24],
+ ["Rio de Janeiro",{c0:"v",c1:"j",c3:"n",c4:"i"},20],
+ ["Arequipa",    {c0:"v",c1:"j"},18],
+ ["Lima",        {c0:"v",c1:"j"},18],
+ ["Santa Cruz",  {c0:"v",c1:"i",c2:"n",c3:"i",c4:"i"},12],
+ ["San José",    {c0:"v",dj:"p",ec:"p"},12],
+ ["Martínez",    {c0:"v"},7],
+ ["Viña del Mar",{},0]
+];
+/* ====== Fin de la partie à modifier ====== */
+
+const ST = {v:["Validé","p-ok"], p:["A participé","p-ok"], j:["JO certifiés","p-info"], r:["Sans référent","p-crit"], b:["Bilan reçu","p-info"], i:["Inscrit","p-wait"], n:["Ne participe pas","p-off"], "":["—","p-off"]};
+const fmt = d => new Date(d+"T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+const ouvertes = new Date() <= new Date(CONFIG.dateLimite+"T23:59:59");
+const el = (t,c,h) => {const e=document.createElement(t); if(c) e.className=c; if(h!=null) e.innerHTML=h; return e;};
+
+document.querySelectorAll(CONFIG.afficherPoints ? "[data-nopts]" : "[data-pts]").forEach(e => e.remove());
+document.getElementById("d-limite").textContent = fmt(CONFIG.dateLimite);
+document.getElementById("contact").textContent = CONFIG.contact;
+
+document.getElementById("d-css").textContent = fmt(CONFIG.dateLimiteCSS);
+const btnCss = document.getElementById("btn-css");
+if (CONFIG.formulaire) btnCss.href = "#formulaire";
+else btnCss.addEventListener("click", e => { e.preventDefault(); document.getElementById("todo-css").textContent = "Maquette : ce formulaire n'est pas encore branché."; });
+const VUES = ["css","projets","formulaire","label","tableau","fiche","contacts"];
+(function(){
+  const z = document.getElementById("form-zone");
+  if (!CONFIG.formulaire) { z.innerHTML = '<p class="form-alt">Le formulaire sera bientôt disponible.</p>'; return; }
+  // Sur claude.ai, l'intégration d'un autre site est bloquée : on propose alors le lien direct.
+  const integrable = !/claude/i.test(location.hostname);
+  const lien = '<a class="btn primary" href="' + CONFIG.formulaire + '">Ouvrir le formulaire</a>';
+  if (integrable) {
+    const f = document.createElement("iframe");
+    f.src = CONFIG.formulaire + (CONFIG.formulaire.includes("?") ? "&" : "?") + "embedded=true";
+    f.title = "Formulaire de la ligue"; f.loading = "lazy";
+    z.appendChild(f);
+    z.insertAdjacentHTML("beforeend", '<p class="sub">Le formulaire ne s\'affiche pas ? ' + lien + '</p>');
+  } else {
+    z.innerHTML = '<div class="form-alt"><p>Le formulaire s\'ouvre dans un nouvel onglet. Revenez ensuite sur cette page pour continuer.</p>' + lien + '</div>';
+  }
+})();
+const montrer = () => {
+  let v = location.hash.replace("#","");
+  if (v === "challenges") v = "projets";
+  if (!VUES.includes(v)) v = "projets";
+  document.querySelectorAll("main > section").forEach(sec => sec.classList.toggle("active", sec.id === v));
+  document.querySelectorAll("nav.jump a").forEach(a => { if (a.getAttribute("href") === "#" + v) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+};
+document.documentElement.classList.add("vues");
+window.addEventListener("hashchange", () => { montrer(); const a = document.querySelector("main > section.active"); if (a) a.scrollIntoView(); });
+const cards = document.getElementById("cards");
+CHALLENGES.forEach(c => {
+  const card = el("article","card");
+  card.appendChild(el("div","num",c.num));
+  card.appendChild(el("h3",null,c.titre));
+  const meta = el("div","meta");
+  meta.appendChild(el("span","pill p-info",c.pour));
+  if (CONFIG.afficherPoints && c.max) meta.appendChild(el("span","pill p-off","Jusqu'à "+c.max+" points"));
+  if (c.ouvert !== null) {
+    const on = c.ouvert && ouvertes;
+    meta.appendChild(el("span","pill "+(on?"p-ok":"p-off"), on ? "Inscriptions ouvertes jusqu'au "+fmt(CONFIG.dateLimite) : "Inscriptions fermées"));
+  }
+  card.appendChild(meta);
+  card.appendChild(el("p",null,c.texte));
+  card.appendChild(el("p",null,"<strong>"+(c.etapes||"Pour valider")+"</strong>"));
+  card.appendChild(el("ul",null,c.valider.map(v=>"<li>"+v+"</li>").join("")));
+  card.appendChild(el("div","when",c.quand));
+  const act = el("div","actions"), todo = el("div","todo");
+  todo.setAttribute("role","status");
+  const bouton = (txt, url, primary) => {
+    const b = el("a","btn"+(primary?" primary":""),txt);
+    if (url) b.href = "#formulaire";
+    else { b.href="#challenges"; b.addEventListener("click",e=>{e.preventDefault(); todo.textContent="Maquette : ce formulaire n'est pas encore branché.";}); }
+    return b;
+  };
+  if (c.ouvert !== null) {
+    if (c.ouvert && ouvertes) act.appendChild(bouton(c.inscrire||"S'inscrire", CONFIG.formulaire, true));
+    if (c.depot) act.appendChild(bouton(c.depot, CONFIG.formulaire, false));
+  } else {
+    const b = el("a","btn primary","Ma fiche statistique"); b.href="#fiche"; act.appendChild(b);
+  }
+  if (c.lien) { const a = el("a","btn",c.lien.t); a.href=c.lien.u; act.appendChild(a); }
+  card.appendChild(act); card.appendChild(todo);
+  cards.appendChild(card);
+});
+
+const legend = document.getElementById("legend");
+const LIGNES = CONFIG.afficherPoints ? ETABS : ETABS.map(e => [e[0], {}, 0]);
+(CONFIG.afficherPoints ? ["v","p","j","b","i","n","r"].filter(k => ETABS.some(e => Object.values(e[1]).includes(k))) : ["i","b","v","n"]).forEach(k => legend.appendChild(el("span","pill "+ST[k][1],ST[k][0])));
+const thead = document.getElementById("thead");
+thead.appendChild(el("th",null,"Établissement"));
+CHALLENGES.forEach(c => thead.appendChild(el("th",null,(c.num==="Défis"?"Défis des Jeux":c.num)+"<br><span class=\"max\">"+(c.id==="ec"?"":c.titre)+(CONFIG.afficherPoints&&c.max?" · "+c.max+" pts max":"")+"</span>")));
+if (CONFIG.afficherPoints) thead.appendChild(el("th","tot","Points<br><span class=\"max\">sur "+CHALLENGES.reduce((t,c)=>t+(c.max||0),0)+"</span>"));
+const tbody = document.getElementById("tbody");
+LIGNES.slice().sort((a,b)=>CONFIG.afficherPoints ? b[2]-a[2] : a[0].localeCompare(b[0],"fr")).forEach(([nom,s,pts]) => {
+  const tr = el("tr");
+  tr.appendChild(el("td",null,"<strong>"+nom+"</strong>"));
+  CHALLENGES.forEach(c => { const k = s[c.id]||""; const td = el("td"); td.appendChild(el("span",k?"pill "+ST[k][1]:"",ST[k][0])); tr.appendChild(td); });
+  if (CONFIG.afficherPoints) tr.appendChild(el("td","tot",pts));
+  tbody.appendChild(tr);
+});
+montrer();
+</script>
+</body>
+</html>
