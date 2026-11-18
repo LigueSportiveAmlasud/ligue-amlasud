@@ -36,6 +36,7 @@ header.top{padding:28px 0 14px}
 .menubar nav.jump{margin:0;padding:10px 0}
 .intro{margin-top:8px}
 main > section{scroll-margin-top:120px}
+#cal-zone iframe{width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;margin-top:14px;background:#fff}
 #form-zone iframe{width:100%;height:2200px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-top:14px}
 .form-alt{margin-top:14px;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .logos{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
@@ -100,14 +101,14 @@ footer{margin-top:40px;padding:22px 0 80px;border-top:1px solid var(--line);colo
 </div></header>
 <div class="menubar"><div class="wrap">
   <nav class="jump" id="menu" aria-label="Menu">
-    <a class="rouge" href="#css">Postuler à la commission</a><a href="#projets">Les projets</a><a class="form" href="#formulaire">Formulaire</a><a href="#label">Label Génération 2030</a><a href="#tableau">Tableau de bord</a><a href="#contacts">Contacts</a><a href="https://view.genially.com/68a5c2e8805f0fe4595d3413">Calendrier sportif</a>
+    <a class="rouge" href="#css">Postuler à la commission</a><a href="#projets">Les projets</a><a href="#label">Label Génération 2030</a><a href="#tableau">Tableau de bord</a><a href="#contacts">Contacts</a><a href="#calendrier">Calendrier sportif</a>
   </nav>
 </div></div>
 
 <main class="wrap">
 <div class="intro">
   <p class="sante"><strong>2026-2027, Année de la santé.</strong> « Promouvoir, prévenir, accompagner : agir ensemble pour notre santé ! » Tous les projets de la ligue s'inscrivent dans ce thème.</p>
-  <p class="plus">Les dates de l'année sont dans le <a href="https://view.genially.com/68a5c2e8805f0fe4595d3413">calendrier sportif</a>. Pour plus d'informations, connectez-vous à l'<a href="https://orion.aefe.fr/Intranet/air2_240366/eps-et-sport-scolaire-en-amlasud">espace collaboratif Orion « EPS et sport scolaire en Amlasud »</a>.</p>
+  <p class="plus">Les dates de l'année sont dans le <a href="#calendrier">calendrier sportif</a>. Pour plus d'informations, connectez-vous à l'<a href="https://orion.aefe.fr/Intranet/air2_240366/eps-et-sport-scolaire-en-amlasud">espace collaboratif Orion « EPS et sport scolaire en Amlasud »</a>.</p>
 </div>
 <section id="css" aria-labelledby="t-css">
   <h2 id="t-css" class="rouge">Postuler à la commission sport scolaire</h2>
@@ -213,6 +214,11 @@ footer{margin-top:40px;padding:22px 0 80px;border-top:1px solid var(--line);colo
   <p class="sub">Un seul formulaire, sans compte Google : inscription aux projets, candidature à la commission sport scolaire ou dépôt d'un lien. Le menu reste en haut de la page pour revenir aux projets.</p>
   <div id="form-zone"></div>
 </section>
+<section id="calendrier" aria-labelledby="t-cal">
+  <h2 id="t-cal">Calendrier sportif</h2>
+  <p class="sub">Les dates de l'année de la ligue. Le menu reste en haut de la page pour revenir aux projets.</p>
+  <div id="cal-zone"></div>
+</section>
 <section id="contacts" aria-labelledby="t-contacts">
   <h2 id="t-contacts">Contacts</h2>
   <div class="two" style="margin-top:14px">
@@ -310,7 +316,19 @@ document.getElementById("d-css").textContent = fmt(CONFIG.dateLimiteCSS);
 const btnCss = document.getElementById("btn-css");
 if (CONFIG.formulaire) btnCss.href = "#formulaire";
 else btnCss.addEventListener("click", e => { e.preventDefault(); document.getElementById("todo-css").textContent = "Maquette : ce formulaire n'est pas encore branché."; });
-const VUES = ["css","projets","formulaire","label","tableau","fiche","contacts"];
+const VUES = ["css","projets","formulaire","calendrier","label","tableau","fiche","contacts"];
+(function(){
+  const z = document.getElementById("cal-zone"), url = "https://view.genially.com/68a5c2e8805f0fe4595d3413";
+  const lien = '<a class="btn primary" href="' + url + '" target="_blank" rel="noopener">Ouvrir le calendrier dans un nouvel onglet</a>';
+  if (!/claude/i.test(location.hostname)) {
+    const f = document.createElement("iframe");
+    f.src = url; f.title = "Calendrier sportif de la ligue"; f.loading = "lazy"; f.allowFullscreen = true;
+    z.appendChild(f);
+    z.insertAdjacentHTML("beforeend", '<p class="sub">' + lien + '</p>');
+  } else {
+    z.innerHTML = '<div class="form-alt">' + lien + '</div>';
+  }
+})();
 (function(){
   const z = document.getElementById("form-zone");
   if (!CONFIG.formulaire) { z.innerHTML = '<p class="form-alt">Le formulaire sera bientôt disponible.</p>'; return; }
